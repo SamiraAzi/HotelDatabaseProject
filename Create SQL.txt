@@ -1,0 +1,50 @@
+create table GUEST 
+(
+  guest_ID varchar(8),
+  first_name varchar(10),
+  last_name varchar(10),
+  title char(4),
+  phone_number bigint,
+  credit_card_NO bigint,
+  email varchar(20),
+  primary key(guest_ID)
+);
+
+create table HOTEL
+(
+  hotel_name varchar(15),
+  address varchar(50),
+  phone_number bigint,
+  star_rating int,
+  primary key(hotel_name)
+);
+
+create table ROOM
+(
+  hotel_name varchar(15),
+  room_number int,
+  room_price varchar(5),
+  occupancy int,
+  room_type varchar(10),
+  primary key(hotel_name, room_number),
+  foreign key(hotel_name) references HOTEL(hotel_name)
+  on update cascade
+);
+  
+create table RESERVATION 
+(
+  reservation_No int,
+  guest_ID varchar(8),
+  hotel_name varchar(15),
+  room_number int,
+  check_in_date date,
+  check_out_date date,
+  no_of_guest int,
+  primary key(reservation_No),
+  foreign key(guest_ID) references GUEST(guest_ID)
+  on update cascade,
+  foreign key( hotel_name, room_number) references ROOM(hotel_name, room_number)
+  on update cascade
+);
+
+   
